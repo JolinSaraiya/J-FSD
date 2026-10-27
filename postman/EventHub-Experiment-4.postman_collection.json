@@ -1,0 +1,71 @@
+{
+  "info": {
+    "name": "EventHub - Experiment 4 REST API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api" },
+    { "key": "eventId", "value": "1" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "GET all events",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/events" }
+    },
+    {
+      "name": "GET event by ID",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/events/{{eventId}}" }
+    },
+    {
+      "name": "POST create event",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\":\"Postman Demo\",\"description\":\"Created through the REST API\",\"date\":\"2026-12-01\",\"time\":\"11:00\",\"location\":\"Mumbai\",\"category\":\"Demo\"}"
+        },
+        "url": "{{baseUrl}}/events"
+      }
+    },
+    {
+      "name": "PUT update event",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\":\"Updated Postman Demo\",\"description\":\"Updated through PUT\",\"date\":\"2026-12-02\",\"time\":\"12:00\",\"location\":\"Pune\",\"category\":\"Updated\"}"
+        },
+        "url": "{{baseUrl}}/events/{{eventId}}"
+      }
+    },
+    {
+      "name": "DELETE event",
+      "request": {
+        "method": "DELETE",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/events/{{eventId}}"
+      }
+    },
+    {
+      "name": "Invalid event request",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": { "mode": "raw", "raw": "{\"title\":\"Missing required fields\"}" },
+        "url": "{{baseUrl}}/events"
+      }
+    }
+  ]
+}
